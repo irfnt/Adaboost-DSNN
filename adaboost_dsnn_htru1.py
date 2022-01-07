@@ -195,7 +195,7 @@ class BinaryClassifier(BaseEstimator, ClassifierMixin):
   def __init__(self):
     self.model = new_DSNN()
     
-    self.classifier = MyKerasClassifier(build_fn=new_DSNN, epochs=100,validation_data=(X_test, Y_test), batch_size=32, verbose=1)
+    self.classifier = MyKerasClassifier(build_fn=new_DSNN, epochs=100,validation_data=(X_test, Y_test), batch_size=64, verbose=1)
 
   def fit(self, X_train, Y_train, sample_weight=None):
     self.n_classes_ = 2
