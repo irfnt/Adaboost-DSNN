@@ -8,7 +8,7 @@ from keras.layers import Dense
 from keras.layers import AlphaDropout
 from tensorflow.keras.utils import to_categorical
 from keras import backend as K
-
+import time
 
 my_data = np.array(pd.read_csv('/content/HTRU_2.csv', sep=',',header=None))
 
@@ -19,7 +19,7 @@ y = to_categorical(y)
 num_classes = 2
 x = preprocessing.scale(x)
 #x = (x - np.mean(x)) / np.std(x) 
-
+start_time=time.time()
 def new_model():
   model = Sequential()
   model.add(Dense(512, activation='selu', kernel_initializer='lecun_normal', input_shape=(8,)))
@@ -49,6 +49,7 @@ def new_model():
 
 model.fit(x, y, validation_split=0.3, epochs=10, batch_size=100, verbose=1, shuffle=True)
 # Final evaluation of the model
+totaltime= time.time()-start_time
 scores = model.evaluate(x, y, verbose=0)
 print("Error: %.2f%%" % (100-scores[1]*100))
 from SNNadaboost import AdaBoostClassifier as Ada_NN
