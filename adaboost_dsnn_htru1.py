@@ -19,13 +19,14 @@ from sklearn.model_selection import GridSearchCV
 from tensorflow.keras.layers import AlphaDropout
 from tensorflow.keras.optimizers import Adam
 from imblearn.over_sampling import SMOTE
+import time
 # In this code I am going to use keras to classify a binary output
 #First we need to load the data scale it and define our training data
 #Then I will define a network of layers that amps my input to my targets
 #Then I will need a loss funtion and some kind of metric to understand the learning process
 #Finally I will iterate through the training data using fit()
 
-df=pd.read_csv('/content/all_in_one.csv')
+df=pd.read_csv('HTRU1.csv')
 #Load the data from the HTRU csv and print its hsape
 
 df.shape
@@ -84,7 +85,7 @@ X_test = scaler.transform(X_test)
 X_test.shape
 
 import tensorflow as tf
-
+start=time.time()
 def new_DSNN():
   model= Sequential()
   #model.add(Dense(512, activation='selu', kernel_initializer='lecun_normal', input_dim=6,))
@@ -111,17 +112,11 @@ def new_DSNN():
 model=new_DSNN()
 
 history= model.fit(X_train, Y_train, epochs=100, batch_size=64, validation_data=(X_test, Y_test), verbose=1)
-
+print("---%seconds---"%(time.time()-start))
 !pip install SciencePlots
 import matplotlib.pyplot as plt
 plt.style.reload_library()
 plt.style.use('science')
-
-! sudo apt-get install texlive-latex-recommended 
-! sudo apt install texlive-latex-extra
-! sudo apt install dvipng
-
-! sudo apt install cm-super
 
 print(history.history.keys())
 # summarize history for accuracy
