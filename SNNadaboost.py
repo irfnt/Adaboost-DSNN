@@ -1,7 +1,4 @@
 
-
-__author__ = 'Xin, ab'
-
 import numpy as np
 from numpy.core.umath_tests import inner1d
 from copy import deepcopy
